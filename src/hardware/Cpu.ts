@@ -1,9 +1,10 @@
 import {System} from "../System";
+import {Hardware} from "./Hardware";
+export class Cpu extends Hardware {
 
-export class Cpu {
 
     constructor() {
-        
+        super(0,"CPU",false);
         
     }
 }
