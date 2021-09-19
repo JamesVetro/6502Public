@@ -1,6 +1,7 @@
 // import statements for hardware
 import {Cpu} from "./hardware/Cpu";
 import {Hardware} from "./hardware/Hardware";
+import { Memory } from "./hardware/Memory";
 
 /*
     Constants
@@ -17,6 +18,7 @@ const CLOCK_INTERVAL= 500;               // This is in ms (milliseconds) so 1000
 export class System extends Hardware{
 
     private _CPU : Cpu = null;
+    private _Mem : Memory = null;
     
     public running: boolean = false;
 
@@ -26,7 +28,7 @@ export class System extends Hardware{
 
         
         this._CPU = new Cpu();
-        
+        this._Mem = new Memory();
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
         When power is applied to the system clock, it begins sending pulses to all clock observing hardware
@@ -39,8 +41,11 @@ export class System extends Hardware{
 
     public startSystem(): boolean {
         this.log()
-        this._CPU.log()
+        this._CPU.log();
+        this._Mem.initMem();
+        this._Mem.dispCont();
         return true;
+        
     }
 
     public stopSystem(): boolean {
