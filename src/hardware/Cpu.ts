@@ -3,8 +3,8 @@ import {Hardware} from "./Hardware";
 import {ClockListener} from "./imp/Clocklistener"
 export class Cpu extends Hardware implements ClockListener{
 
-
-    constructor() {
+    private ClockCount
+    constructor(count) {
         super(0,"CPU",false);
         
     }

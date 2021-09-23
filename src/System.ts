@@ -27,7 +27,7 @@ export class System extends Hardware{
         console.log("Hello TSIRAM!");
 
         
-        this._CPU = new Cpu();
+        this._CPU = new Cpu(0);
         this._Mem = new Memory();
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
