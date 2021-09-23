@@ -13,6 +13,14 @@ export class Hardware {
         this.name=name;
        
     } 
+    public hexLog(num,len){
+        let hex : string = num.toString(16).toUpper();
+        let padding : string = "";
+        for (let i = len; i > hex.length, i--;){
+            padding += "0";
+            }
+        return padding + hex;
+        }
     public log(){
         if(this.debug == true){
         console.log("HW - "+this.name+" id: "+this.idNum+" - "+Date.now())
