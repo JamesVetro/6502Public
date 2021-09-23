@@ -1,6 +1,6 @@
 import {System} from "../System";
 import {Hardware} from "./Hardware";
-
+import {ClockListener} from "./imp/Clocklistener"
 export class Cpu extends Hardware implements ClockListener{
 
 

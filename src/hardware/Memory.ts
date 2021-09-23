@@ -1,7 +1,8 @@
 import {System} from "../System";
 import {Hardware} from "./Hardware";
 import {Cpu} from "./Cpu"
-export class Memory extends Hardware {
+import {ClockListener} from "./imp/Clocklistener"
+export class Memory extends Hardware implements ClockListener{
     private memArr : 0x00[];
     public memSize : 0x10000
     public initMem(){
