@@ -8,7 +8,7 @@ export class Cpu extends Hardware implements ClockListener{
         this.ClockCount++;
         console.log("received clock pulse - CPU Clock Count: " + this.ClockCount);
     }
-    private ClockCount
+    private ClockCount : number = 0;
     constructor(count) {
         super(0,"CPU",false);
     }

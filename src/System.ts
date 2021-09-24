@@ -20,7 +20,7 @@ export class System extends Hardware{
 
     private _CPU : Cpu = null;
     private _Mem : Memory = null;
-    
+    private _Clock: Clock = null;
     public running: boolean = false;
 
     constructor() {
@@ -30,6 +30,7 @@ export class System extends Hardware{
         
         this._CPU = new Cpu(0);
         this._Mem = new Memory();
+        this._Clock = new Clock();
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
         When power is applied to the system clock, it begins sending pulses to all clock observing hardware
@@ -45,6 +46,8 @@ export class System extends Hardware{
         this._CPU.log();
         this._Mem.initMem();
         this._Mem.dispCont();
+        this._Clock.addListener(this._CPU);
+        this._Clock.addListener(this._Mem);
         return true;
         
     }

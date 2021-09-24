@@ -7,17 +7,19 @@ import { setInterval } from "timers";
 
 export class Clock extends Hardware{
     private listenerarr : ClockListener[];
+
     private setInterval=setInterval
     public addListener(listener){
         this.listenerarr.push(listener);
     }
     public clockRun(){
         for (let i = 0; i < this.listenerarr.length; i++){
-            this.listenerarr[i].pulse
+            this.listenerarr[i].pulse()
         }
     } 
     constructor(){
         super(0,Clock)
-        setInterval(this.clockRun,100)
+        this.listenerarr = new Array();
+        setInterval(() => this.clockRun(),100)
     }
 }
