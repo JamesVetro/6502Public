@@ -21,7 +21,7 @@ export class Hardware {
     public hexLog(num,len){
         let hex : string = num.toString(16).toUpperCase();
         let padding : string = "";
-        for (let i = len; i > hex.length, i--;){
+        for (let i = len-1; i > hex.length, i--;){
             padding += "0";
             }
         return padding + hex;
