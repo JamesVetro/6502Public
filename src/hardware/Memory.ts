@@ -2,13 +2,14 @@ import {System} from "../System";
 import {Hardware} from "./Hardware";
 import {Cpu} from "./Cpu"
 import {ClockListener} from "./imp/Clocklistener"
+import { Clock } from "./Clock";
 export class Memory extends Hardware implements ClockListener{
     private memArr : 0x00[];
     public memSize : 0x10000
     public initMem(){
-        this.memArr = new Array();
+        this.memArr = new Array(0x10000);
         for (let i = 0; i < this.memSize; i++){
-            this.memArr.push(0x00);}
+            this.memArr[i] =0x00;}
         }
     public dispCont(){
         for (let i = 0x0; i < 0x15; i++) {

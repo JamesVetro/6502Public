@@ -2,6 +2,7 @@
 import {Cpu} from "./hardware/Cpu";
 import {Hardware} from "./hardware/Hardware";
 import { Memory } from "./hardware/Memory";
+import { Clock } from "./hardware/Clock";
 
 /*
     Constants
