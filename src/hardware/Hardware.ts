@@ -13,6 +13,9 @@ export class Hardware {
         this.name=name;
        
     } 
+    public pulse(){
+        console.log("received clock pulse");
+    }
     public hexLog(num,len){
         let hex : string = num.toString(16).toUpper();
         let padding : string = "";
