@@ -15,9 +15,11 @@ export class Hardware {
         this.name=name;
        
     } 
+    //simple function that posts whenever it recieves a clock pulse
     public pulse(){
         console.log("received clock pulse");
     }
+    //function that converts numbers to hex and pads them to 4 spaces
     public hexLog(num,len){
         let hex : string = num.toString(16).toUpperCase();
         let padding : string = "";
@@ -26,6 +28,7 @@ export class Hardware {
             }
         return padding + hex;
         }
+        //function that posts whenever a new piece of hardware is created
     public log(){
         if(this.debug == true){
         console.log("HW - "+this.name+" id: "+this.idNum+" - "+Date.now())

@@ -6,12 +6,14 @@ import { Clock } from "./Clock";
 export class Memory extends Hardware implements ClockListener{
     private memArr : number[];
     public memSize : number = 0x10000
+    //function that creates the array of 0x00 values in the memory array to be overwritten later
     public initMem(){
         this.memArr = new Array(0x10000);
         for (let i = 0; i < this.memSize; i++){
             this.memArr[i] = 0x00;
         }
     }
+    //function that logs the first 16 values in the memory, and if the attempted call is not an actual number in that range, then it errors out
     public dispCont(){
         for (let i = 0x0; i < 0x15; i++) {
             if((i<=0xFFFF) && (i>=0x00)){

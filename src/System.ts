@@ -27,7 +27,7 @@ export class System extends Hardware{
         super(0,"System");
         console.log("Hello TSIRAM!");
 
-        
+        //creates the initial components
         this._CPU = new Cpu(0);
         this._Mem = new Memory();
         this._Clock = new Clock();
@@ -40,7 +40,7 @@ export class System extends Hardware{
         this.startSystem();
 
     }
-
+//system starts, begins clock, begins each hardware piece, and gives the clock its listeners
     public startSystem(): boolean {
         this.log()
         this._CPU.log();
@@ -51,7 +51,7 @@ export class System extends Hardware{
         return true;
         
     }
-
+// function to stop the system
     public stopSystem(): boolean {
 
         return false;
