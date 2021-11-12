@@ -17,8 +17,8 @@ export class Memory extends Hardware implements ClockListener{
         }
     }
     //function that logs the first 16 values in the memory, and if the attempted call is not an actual number in that range, then it errors out
-    public dispCont(){
-        for (let i = 0x0; i < 0x15; i++) {
+    public dispCont(start,end){
+        for (let i = start; i <= end; i++) {
             if((i<=0xFFFF) && (i>=0x00)){
                 console.log(this.hexLog(this.memArr[i],4));
             }else{
