@@ -5,15 +5,17 @@ import {System} from "../System";
 import {Cpu} from "./Cpu";
 import { Memory } from "./Memory";
 import { Clock } from "./Clock";
+import { MMU } from "./MMU"
 export class Hardware {
     private debug : boolean;
     private idNum : number;
     private name : string;
-    constructor(idNum, name, debug=true) {
+    private arraylength :number;
+    constructor(idNum, name, debug=true,arraylength=0) {
         this.debug=debug;
         this.idNum=idNum;
         this.name=name;
-       
+       this.arraylength = arraylength
     } 
     //simple function that posts whenever it recieves a clock pulse
     public pulse(){
@@ -32,7 +34,9 @@ export class Hardware {
     public log(){
         if(this.debug == true){
         console.log("HW - "+this.name+" id: "+this.idNum+" - "+Date.now())
-    } 
+    } else {
+        console.log("HW - "+this.name+" id: "+this.idNum+" - "+Date.now()+" Created - Addressable space : "+this.arraylength)
+    }
     } 
 }
 

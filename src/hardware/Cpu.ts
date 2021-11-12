@@ -1,8 +1,8 @@
 import {System} from "../System";
 import {Hardware} from "./Hardware";
-import {ClockListener} from "./imp/Clocklistener"
-import { Memory } from "./Memory";
+import {ClockListener} from "./imp/Clocklistener";
 import { Clock } from "./Clock";
+import { MMU } from "./MMU"
 export class Cpu extends Hardware implements ClockListener{
     //Function that counts the amount of pulses its recieved and posts the message with that number to the console
     public pulse(){
@@ -11,6 +11,6 @@ export class Cpu extends Hardware implements ClockListener{
     }
     private ClockCount : number = 0;
     constructor(count) {
-        super(0,"CPU",false);
+        super(0,"CPU",true);
     }
 }
