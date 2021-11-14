@@ -21,11 +21,11 @@ export class Hardware {
     public pulse(){
         console.log("received clock pulse");
     }
-    //function that converts numbers to hex and pads them to 4 spaces
+    //function that converts numbers to hex and pads them to 2 spaces
     public hexLog(num,len){
         let hex : string = num.toString(16).toUpperCase();
         let padding : string = "";
-        for (let i = len-1; i > hex.length, i--;){
+        for (let i = len; i > hex.length; i--){
             padding += "0";
             }
         return padding + hex;

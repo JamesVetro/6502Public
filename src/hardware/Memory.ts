@@ -1,6 +1,5 @@
 import {System} from "../System";
 import {Hardware} from "./Hardware";
-import {Cpu} from "./Cpu"
 import {ClockListener} from "./imp/Clocklistener"
 import { Clock } from "./Clock";
 import { MMU } from "./MMU"
@@ -17,14 +16,20 @@ export class Memory extends Hardware implements ClockListener{
         }
     }
     //function that logs the first 16 values in the memory, and if the attempted call is not an actual number in that range, then it errors out
+    
     public dispCont(start,end){
+        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Initialized Memory");
+        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Memory Dump: Debug");
+        console.log("[HW - MMU id: 0 - "+Date.now()+"]: --------------------------------------");
         for (let i = start; i <= end; i++) {
             if((i<=0xFFFF) && (i>=0x00)){
-                console.log(this.hexLog(this.memArr[i],4));
+                console.log("[HW - MMU id: 0 - "+Date.now()+"]: Addr 000"+i.toString(16).toUpperCase()+": | "+this.hexLog(this.memArr[i],2));
             }else{
                 console.log("RAM Address: "+i+" is experiencing a conversion error. Data undefined")
             }
         }
+        console.log("[HW - MMU id: 0 - "+Date.now()+"]: --------------------------------------");
+        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Memory Dump: Complete");
     }
     public reset(){
         this.MAR = 0x0

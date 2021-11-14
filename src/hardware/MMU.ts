@@ -17,16 +17,18 @@ export class MMU extends Hardware{
             this.HLstore = this.HLstore + addPiece
             this.HLcount++
             if(this.HLcount==2){
+                this.HLstore = this.HLstore+addPiece
                 this.Mem.setMAR(this.HLstore)
-                this.HLcount = 0
+                this.HLcount = 1
                 this.HLstore = 0x0
             }
         }else{
             this.HLstore = this.HLstore + addPiece
             this.HLcount++
             if(this.HLcount==2){
+                this.HLstore = this.HLstore+addPiece
                 this.Mem.setMAR(this.HLstore)
-                this.HLcount = 0
+                this.HLcount = 1
                 this.HLstore = 0x0
             }
         }
