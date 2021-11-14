@@ -15,7 +15,7 @@ export class Memory extends Hardware implements ClockListener{
             this.memArr[i] = 0x00;
         }
     }
-    //function that logs the first 16 values in the memory, and if the attempted call is not an actual number in that range, then it errors out
+    //function that logs the first X values in the memory, and if the attempted call is not an actual number in that range, then it errors out
     
     public dispCont(start,end){
         console.log("[HW - MMU id: 0 - "+Date.now()+"]: Initialized Memory");
@@ -41,7 +41,7 @@ export class Memory extends Hardware implements ClockListener{
     public pulse(){
 
     };
-
+    //Getters and setters for the MAR and MDR
     public getMAR(){
         return this.MAR
     }
@@ -54,12 +54,14 @@ export class Memory extends Hardware implements ClockListener{
     public setMAR(datMAR){
         this.MAR = datMAR
     }
+    //Read and write functions for the Memory
     public read(){
         this.setMDR(this.memArr[this.getMAR()])
     }
     public write(){
         this.memArr[this.getMAR()] = this.getMDR()
     }
+
     constructor() {
         super(0,"RAM",false, 65536);
 

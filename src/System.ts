@@ -48,6 +48,7 @@ export class System extends Hardware{
         this.log()
         this._CPU.log();
         this._Mem.initMem();
+        //all the write immidiates for the first test program
         this._MMU.writeImmidiate(0x0000,0xA9)
         this._MMU.writeImmidiate(0x0001,0x0D)
         this._MMU.writeImmidiate(0x0002,0xA9)
