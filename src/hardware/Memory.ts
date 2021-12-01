@@ -57,6 +57,7 @@ export class Memory extends Hardware implements ClockListener{
     //Read and write functions for the Memory
     public read(){
         this.setMDR(this.memArr[this.getMAR()])
+        return this.MDR
     }
     public write(){
         this.memArr[this.getMAR()] = this.getMDR()

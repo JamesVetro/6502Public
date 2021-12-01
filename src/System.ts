@@ -62,12 +62,9 @@ export class System extends Hardware{
         this._Mem.dispCont(0x0000,0x000A);
         this._Clock.addListener(this._CPU);
         this._Clock.addListener(this._Mem);
-        
-        
+        this._CPU.accumulator = 65
+        this._CPU.stoAccMem(1)
         return true;
-        
-
-
     }
 // function to stop the system
     public stopSystem(): boolean {

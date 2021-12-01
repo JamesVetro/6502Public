@@ -9,6 +9,7 @@ export class MMU extends Hardware{
     public highLow: boolean
     public HLcount: number
     public HLstore: number
+    public reader: number
     //This function takes in a number, sent by the CPU, as either a full 16 bit number, or half. If its full, it just sets it to MAR
         //if its half, it checks if its high or low order, then concatinates accordingly. 
     public changeMAR(addPiece, fullHalf, highLow){
@@ -37,7 +38,8 @@ export class MMU extends Hardware{
     }
     //functions to allow the CPU to read through the MMU, as well as change the MDR
     public CPURead(){
-        this.Mem.read()
+        this.reader = this.Mem.read();
+        
     }
     public CPUWrite(){
         this.Mem.write()
