@@ -119,7 +119,7 @@ export class Cpu extends Hardware implements ClockListener{
             case 0xEA:
                 this.NOP()
             case 0x00:
-                this.Break() //-------------------------------------------------------
+                this.Break()
             case 0xEC:
                 this.compare
             case 0xD0:
@@ -230,7 +230,6 @@ export class Cpu extends Hardware implements ClockListener{
     //00
     public Break(){
         process.exit;
-        //-------------------------------------------------------------------
     }
     //EC
     public compare(){
