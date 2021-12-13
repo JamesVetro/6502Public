@@ -17,6 +17,7 @@ export class Cpu extends Hardware implements ClockListener{
     public instructionReg: number = 0
     public holder: number
     public holder2: number
+    public stringHold: string
     public tempStore
     public twoFlag
     public stepCount: number = 1
@@ -94,50 +95,73 @@ export class Cpu extends Hardware implements ClockListener{
         switch(this.instructionReg){
             case 0xA9:
                 this.loadAccCon()
+                this.stepCount+=3
             case 0xAD:
                 this.loadAccMem()
+                this.stepCount+=3
             case 0x8D:
                 this.stoAccMem()
+                this.stepCount+=3
             case 0x8A:
                 this.loadAccX()
+                this.stepCount+=3
             case 0x98:
                 this.loadAccY()
+                this.stepCount+=3
             case 0x6D:
                 //----------------------------------------------------------------------------
+                this.stepCount+=3
             case 0xA2:
                 this.loadXCon()
+                this.stepCount+=3
             case 0xAE:
                 this.loadXMem()
+                this.stepCount+=3
             case 0xAA:
                 this.loadXAcc()
+                this.stepCount+=3
             case 0xA0:
                 this.loadYCon()
+                this.stepCount+=3
             case 0xAC:
                 this.loadYMem()
+                this.stepCount+=3
             case 0xA8:
                 this.loadYAcc()
+                this.stepCount+=3
             case 0xEA:
                 this.NOP()
+                this.stepCount+=3
             case 0x00:
                 this.Break()
+                this.stepCount+=3
             case 0xEC:
                 this.compare
+                this.stepCount+=3
             case 0xD0:
-                this.Branch(1) //-------------------------------------------------
+                this.Branch() //-------------------------------------------------
+                this.stepCount+=3
             case 0xEE:
                 this.increment()
+                this.stepCount++
             case 0xFF:
                 this.systemCall()
+                this.stepCount+=3
+                
         }
     }
     public execute2(){
-
+        this.tempStore = this.memUnit.reader + 1
+        this.stepCount++
     }
     public writeBack(){
-
+        this.memUnit.writeImmidiate(this.holder,this.tempStore)
+        this.stepCount++
     }
     public interrupt(){
 
+        this.progCount++
+        this.stepCount = 1
     }
     //decode 1
     public decoder(){
@@ -238,22 +262,21 @@ export class Cpu extends Hardware implements ClockListener{
         this.xReg = this.memUnit.reader
     }
     //D0
-    public Branch(holding){
+    public Branch(){
         if(this.zFlag = 0){
-        this.progCount += holding //Need to set up negative numbers---------------------------------------------
+        this.progCount += this.holder //Need to set up negative numbers---------------------------------------------
         }
     }
     //EE
     public increment(){
         this.memUnit.changeMAR(this.holder,true,false)
         this.memUnit.CPURead()
-        this.tempStore = this.memUnit.reader + 1
-        this.memUnit.writeImmidiate(this.holder,this.tempStore)
     }
     //FF
     public systemCall(){
         if(this.xReg == 1){
-            console.log(this.yReg)
+            this.stringHold = this.table.asciiToHex(this.yReg.toString())
+            console.log(this.stringHold)
         }else if(this.xReg == 2){
             this.tempStore = this.yReg.toString(16).toUpperCase()
             let padding : string = "";
@@ -262,12 +285,15 @@ export class Cpu extends Hardware implements ClockListener{
             }
             this.tempStore = "0x"+padding+this.tempStore
             this.memUnit.changeMAR(this.tempStore,true,false)
+            
             this.memUnit.CPURead()
-            console.log(this.memUnit.reader)
+            this.stringHold = this.table.asciiToHex(this.memUnit.reader.toString())
+            console.log(this.stringHold)
         }else if(this.xReg == 3){
             this.memUnit.changeMAR(this.holder,true,false)
             this.memUnit.CPURead()
-            console.log(this.memUnit.reader)
+            this.stringHold = this.table.asciiToHex(this.memUnit.reader.toString())
+            console.log(this.stringHold)
         }
     }
     public pulse(){
@@ -293,7 +319,7 @@ export class Cpu extends Hardware implements ClockListener{
 
 
     private ClockCount : number = 0;
-    constructor(count,memHolder) {
+    constructor(memHolder) {
         super(0,"CPU",true);
         this.memUnit = memHolder;
     }

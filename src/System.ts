@@ -4,6 +4,8 @@ import {Hardware} from "./hardware/Hardware";
 import { Memory } from "./hardware/Memory";
 import { Clock } from "./hardware/Clock";
 import { MMU } from "./hardware/MMU";
+import { IC } from "./hardware/interruptController"
+import { runInThisContext } from "vm";
 
 /*
     Constants
@@ -23,6 +25,7 @@ export class System extends Hardware{
     private _Mem : Memory = null;
     private _Clock: Clock = null;
     private _MMU: MMU = null;
+    private _IC: IC = null;
     public running: boolean = false;
 
     constructor() {
@@ -33,7 +36,9 @@ export class System extends Hardware{
         this._Mem = new Memory();
         this._Clock = new Clock();
         this._MMU = new MMU(this._Mem);
-        this._CPU = new Cpu(0,this._MMU);
+        this._IC = new IC()
+        this._CPU = new Cpu(this._MMU);
+        
         /*
         Start the system (Analogous to pressing the power button and having voltages flow through the components)
         When power is applied to the system clock, it begins sending pulses to all clock observing hardware
