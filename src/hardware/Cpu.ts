@@ -215,13 +215,12 @@ export class Cpu extends Hardware implements ClockListener {
                     }
                 break;
             case 0xD0:
-                let jumpdistance = this.MMUUnit.getMDRCPU();    
-                // 2's comp and moves the program counter
-                if (jumpdistance <= 0x7F) {
-                this.progCount += jumpdistance;
+                let jump = this.MMUUnit.getMDRCPU();    //Quick comment, I completely forgot how to do 2's comp, 
+                if (jump <= 0x7F) {                     //glad you still have the slides posted
+                this.progCount += jump;
                 }
                 else {
-                this.progCount -= (0x100-jumpdistance);
+                this.progCount -= (0x100-jump);
                 }
                 this.stepCount = 5;                            
                 this.progCount += 2;                           
@@ -286,6 +285,7 @@ export class Cpu extends Hardware implements ClockListener {
                 break;
         }
     }
+    //pulse method
     public pulse(){
         switch (this.stepCount){
             case 1:
