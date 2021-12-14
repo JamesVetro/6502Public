@@ -20,7 +20,7 @@ export class Clock extends Hardware{
         }
     } 
     constructor(){
-        super(0,Clock)
+        super(0,"Clock")
         this.listenerarr = new Array();
         //every 100 ms, setinterval calls clockrun to pulse the listeners
         setInterval(() => this.clockRun(),100)

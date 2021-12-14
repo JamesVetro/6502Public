@@ -1,75 +1,86 @@
-import {System} from "../System";
-import {Hardware} from "./Hardware";
-import {ClockListener} from "./imp/Clocklistener"
-import { Clock } from "./Clock";
-import { MMU } from "./MMU"
+import {Hardware} from "../hardware/Hardware";
+import { ClockListener } from "./imp/ClockListener";
+
 export class Memory extends Hardware implements ClockListener{
-    private memArr : number[];
-    public memSize : number = 0x10000
-    private MAR : number = 0x0
-    private MDR : number = 0x0
-    //function that creates the array of 0x00 values in the memory array to be overwritten later
-    public initMem(){
-        this.memArr = new Array(0x10000);
+
+    public hexArray:number[];
+    private MAR: number = 0x0000;
+    private MDR: number = 0x00;
+    // Size of addressable memory.
+    private memSize: number = 0x10000;
+    constructor(){
+        super(0, "RAM");
+        this.id = 0;
+        this.name = "RAM"
+        this.log("created - Addressable Space: " + this.memSize);
+    }
+    // Initializes the array, and then fills with 0x00.
+    public initMem() {
+        this.hexArray = new Array (this.memSize);
         for (let i = 0; i < this.memSize; i++){
-            this.memArr[i] = 0x00;
+            this.hexArray[i] = 0x00;
         }
     }
-    //function that logs the first X values in the memory, and if the attempted call is not an actual number in that range, then it errors out
-    
-    public dispCont(start,end){
-        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Initialized Memory");
-        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Memory Dump: Debug");
-        console.log("[HW - MMU id: 0 - "+Date.now()+"]: --------------------------------------");
-        for (let i = start; i <= end; i++) {
-            if((i<=0xFFFF) && (i>=0x00)){
-                console.log("[HW - MMU id: 0 - "+Date.now()+"]: Addr 000"+i.toString(16).toUpperCase()+": | "+this.hexLog(this.memArr[i],2));
+    // Displays content of memory (0x00 to 0x14)
+    public displayMemory(){
+        for (let i = 0x00; i <= 0x14; i++){
+            let memAdrr = this.hexLog(i, 4);
+            let dataVal = this.hexArray[i];
+            let memNum = this.hexLog(dataVal, 2);
+            if (dataVal == undefined || dataVal == null){
+                this.log("Addr " + memAdrr + ":  |  " + memNum + " ERR: number undefined");
             }else{
-                console.log("RAM Address: "+i+" is experiencing a conversion error. Data undefined")
+                this.log("Addr " + memAdrr + ":  |  " + memNum);
             }
         }
-        console.log("[HW - MMU id: 0 - "+Date.now()+"]: --------------------------------------");
-        console.log("[HW - MMU id: 0 - "+Date.now()+"]: Memory Dump: Complete");
     }
-    public reset(){
-        this.MAR = 0x0
-        this.MDR = 0x0
-        for (let i = 0; i < this.memSize; i++){
-            this.memArr[i] = 0x0;
-        }
+    // Getter for the Memory
+    public getMemoryArr(){
+        return this.hexArray;
     }
+    // Setter for Memory array
+    public setMemoryArr(hexArray){
+        this.hexArray = hexArray;
+    }
+     //Getter for MAR
+     public getMAR() {
+        return this.MAR;
+    }
+    //Setter for MAR
+    public setMAR(mar) {
+        this.MAR = mar;
+    }
+    //Getter for MDR
+    public getMDR() {
+        return this.MDR;
+    }
+    //Setter for MDR
+    public setMDR(MDRHolder) {
+        this.MDR = MDRHolder;
+    }
+    //Pulse Method
     public pulse(){
-
-    };
-    //Getters and setters for the MAR and MDR
-    public getMAR(){
-        return this.MAR
+        this.log("Received clock pulse");
     }
-    public getMDR(){
-        return this.MDR
+    //Read memory at a location
+    public read() {
+        this.setMDR(this.hexArray[this.getMAR()]);
+        return this.MDR;
     }
-    public setMDR(datMDR){
-        this.MDR = datMDR
+    //Write the contents of the MDR to memory
+    public write() {    
+        let memArr: number[] = this.getMemoryArr();
+        memArr[this.getMAR()] = this.getMDR();
+        this.setMemoryArr(memArr);
     }
-    public setMAR(datMAR){
-        console.log(datMAR)
-        this.MAR = datMAR
-        console.log(this.MAR)
+    // Resets all values in the Memory and MAR+MDR with 0x00
+    public reset(){
+        let memArr: number[] = this.getMemoryArr();
+        for (let i = 0x00; i < memArr.length; i++){
+            memArr[i] = 0x00;
+        }
+        this.setMemoryArr(memArr);
+        this.setMDR(0x00);
+        this.setMAR(0x0000);
     }
-    //Read and write functions for the Memory
-    public read(){
-        
-        this.setMDR(this.memArr[this.getMAR()])
-        
-        return this.MDR
-    }
-    public write(){
-        this.memArr[this.getMAR()] = this.getMDR()
-    }
-
-    constructor() {
-        super(0,"RAM",false, 65536);
-
-        
-}
 }
