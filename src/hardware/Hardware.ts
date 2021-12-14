@@ -22,7 +22,7 @@ export class Hardware {
         console.log("received clock pulse");
     }
     //function that converts numbers to hex and pads them to 2 spaces
-    public hexLog(num,len){
+    public hexLog(num:number,len){
         let hex : string = num.toString(16).toUpperCase();
         let padding : string = "";
         for (let i = len; i > hex.length; i--){

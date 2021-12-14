@@ -40,6 +40,8 @@ export class MMU extends Hardware{
     public CPURead(){
         this.reader = this.Mem.read();
         
+        return this.reader
+       
     }
     public CPUWrite(){
         this.Mem.write()

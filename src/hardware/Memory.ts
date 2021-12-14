@@ -52,11 +52,15 @@ export class Memory extends Hardware implements ClockListener{
         this.MDR = datMDR
     }
     public setMAR(datMAR){
+        console.log(datMAR)
         this.MAR = datMAR
+        console.log(this.MAR)
     }
     //Read and write functions for the Memory
     public read(){
+        
         this.setMDR(this.memArr[this.getMAR()])
+        
         return this.MDR
     }
     public write(){
