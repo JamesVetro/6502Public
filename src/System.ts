@@ -57,6 +57,7 @@ export class System extends Hardware{
         this._MMU.memoryDump(0x0000,0x0052);
         this._Clock.addListener(this._CPU);
         this._Clock.addListener(this._Mem);
+        this._IC.addIR(this._keyboard)
         return true;
     }
 // function to stop the system
