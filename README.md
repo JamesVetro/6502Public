@@ -6,21 +6,25 @@ tsiraM is a virtual 6502 processor written in TypeScript and running on Node.js.
 - Your design and debugging skills are pushed to solve problems that will melt your brain.  You will debug machine level code you write on a machine you built!
 
 ## What does tsiraM mean?
-It needed a name and I liked WebOS since it built on web technologies and the long term is to use this VM as the basis for a Operating Systems project where you build an OS that runs on your VM.  So while WebOS makes sense for these reasons, I do not like talking to Lawyers.  tsiraM is something I bought the .dot com for a while ago and have not gotten around to using it for anything. If it makes no sense, keep trying, I left a clue.  The 'M' might stand for Microarchitecture, or maybe not.  I wonder if the lawyers will come anyway?  Regardless this is a good name until something better comes along.  Maybe SObeW instead?
+The project needed a name, I like WebOS since this project is built on web technologies and the long term plan is to use this VM as the basis for a Operating Systems project.  In that project you will build an OS that can run on this VM.  Unfortunately, while the name WebOS makes sense for these reasons, I do not like talking to Lawyers so I have decided to use tsiraM instead.  tsiraM is something I bought the .dot com for a while ago and have not gotten around to using it for anything. If it makes no sense, keep trying, I left a clue.  The 'M' might stand for Microarchitecture, or maybe not.  I wonder if the lawyers will come anyway?  Regardless this is a good name until something better comes along.  Maybe SObeW instead?
 
 ## Credits
 This software is an adaptation of a project created by [Dr. Alan Labouseur's](http://labouseur.com/courses/os/) for his Operating Systems (CMPT 424) course project.  That project builds a very cool operating system on top of a rudimentary virtual 6502 CPU.  This project focuses on building a robust and complete 6502 architecture and instruction set.  You will be creating a 6502 emulator programmed using TypeScript that will run on server side JavaScript in Node.js.  Here are references to Dr. Labouseur's original projects:
 - 2019 version: https://github.com/AlanClasses/TSOS-2019
 - 2015-2018 version: https://github.com/AlanClasses/TSOS
 
-There are plans to possibly expand this project in a way that would allow you to continue to use it to bulid an adapted version of Dr. Labouseur's OS project on top of.  Here is an architecture diagram showing how this is planned currently.
+There are plans to possibly expand this project in a way that would allow you to continue to use it to build an adapted version of Dr. Labouseur's OS project on top of.  Here is an architecture diagram showing how this is planned currently.
 ![tsiram-6502](./resources/images/architecture/projectArchitecture-v1.jpeg)
 
 ## Getting Started
 
-If you already have Node.js and TypeScript installed you can clone this repository, you will likely also have to install the type definitions for node to make TypeScript happy.  Once you do that, see the 'How to run' section of this doc.
+To setup a development environment for tsiraM, you will need the following installed and setup:
+ - A terminal (If you are on windows I recommend gitbash which can be installed as part of your windows git client installation.
+ - Node.js / npm
+ - TypeScript (via npm)
+ - A text editor / IDE (I recommend VS Code or Intellij if you are getting started with TypeScript)
 
-If you do not have Node.js and TypeScript installed see the 'How to run' section below.
+If you already have Node.js and TypeScript installed you can skip ahead to the 'How to run' section below.
 
 ## Installation
 ### Node:

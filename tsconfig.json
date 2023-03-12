@@ -10,7 +10,7 @@
 
     "include": [
         "src/**/*"
-    ],
+, "src/System.ts"    ],
     "exclude": [
       "./node_modules"
     ]
